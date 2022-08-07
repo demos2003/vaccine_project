@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+import PatientData from './Views/PatientData';
+import PatientDetails from './Views/PatientDetails';
+import "bootstrap/dist/css/bootstrap.css"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Router>
+  <div className="App">
+   <Routes>
+         
+          <Route path="/" element={<Patient/>}/>
+          <Route path="/details" element={<Details/>}/>
+
+            
+          {/* <Route path="/" element ={<Dash/>} /> */}
+          
+        </Routes>
+    </div>
+    </Router>
     </div>
   );
 }
 
+
+
+
+function Patient(){
+  return<PatientData/>
+}
+
+function Details(){
+  return<PatientDetails/>
+}
+
 export default App;
+
