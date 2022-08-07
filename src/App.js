@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import PatientData from './Views/PatientData';
 import PatientDetails from './Views/PatientDetails';
+import Login from './Views/Login';
 import "bootstrap/dist/css/bootstrap.css"
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
          
           <Route path="/" element={<Patient/>}/>
           <Route path="/details" element={<Details/>}/>
+          <Route path="/login" element={<Log/>}/>
 
             
           {/* <Route path="/" element ={<Dash/>} /> */}
@@ -33,6 +35,10 @@ function Patient(){
 
 function Details(){
   return<PatientDetails/>
+}
+
+function Log(){
+  return<Login/>
 }
 
 export default App;
