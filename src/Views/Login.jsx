@@ -1,31 +1,54 @@
 import React from 'react'
 import "./login.css"
+import config from '../config';
+import { useContext, useRef } from 'react';
+import axios from "axios"
+import { Context } from '../compnents/context/Context';
+
 
 const Login = () => {
+    const userRef = useRef();
+    const passwordRef = useRef();
+    const { dispatch, isFetching } = useContext(Context);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        dispatch({ type: "LOGIN_START" });
+        try {
+            const res = await axios.post(`${config.baseURL}/api/auth/login`, {
+                username: userRef.current.value,
+                password: passwordRef.current.value,
+            })
+            dispatch({ type: "LOGIN_SUCCESS", payload: res.data })
+            res.data && window.location.replace("/admin");
+        } catch (err) {
+            dispatch({ type: "LOGIN_FAILURE" })
+        }
+    };
     return (
         <div>
-            <div className='backgroundimg'>
+            <div className='backgroundimg2'>
                 <div className='login_form'>
 
                     <div className='form_holder'>
                         <div className='form_space'></div>
                         <div className='signup_form'>
-                            <form className='adminlogin_form'>
+                            <form className='adminlogin_form' onSubmit={handleSubmit}>
                                 <h2 style={{ textAlign: "center" }} className="adminlogin_title">Admin Login</h2>
-                                <div class="form-row">
-                                    <div class="form-group form-edit">
+                                <div className="form-row">
+                                    <div className="form-group form-edit">
 
-                                        <input type="email" class="form-control input-edit" id="inputAddress" placeholder="Email Address"></input>
+                                        <input type="email" className="form-control input-edit" id="inputAddress" ref={userRef} placeholder="Email Address"></input>
                                     </div>
-                                    <div class="form-group">
+                                    <div className="form-group">
 
-                                        <input type="password" class="form-control" id="inputPassword4" placeholder="Password"></input>
+                                        <input type="password" className="form-control" id="inputPassword4" ref={passwordRef} placeholder="Password"></input>
                                     </div>
                                 </div>
 
 
 
-                                <button type="submit" class="btn btn-primary admin-btn">Login</button>
+                                <button type="submit" className="btn btn-primary admin-btn" disabled={isFetching}>Login</button>
                             </form>
                         </div>
                     </div>
