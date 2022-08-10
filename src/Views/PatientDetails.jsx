@@ -3,6 +3,8 @@ import "./patientdetail.css"
 import { useState } from 'react'
 import Popup from '../compnents/Popup'
 import { Audio, TailSpin } from 'react-loader-spinner'
+import {AiFillCheckCircle} from 'react-icons/ai'
+import {ImCancelCircle} from 'react-icons/im'
 
 
 
@@ -10,8 +12,7 @@ import { Audio, TailSpin } from 'react-loader-spinner'
 
 const PatientDetails = () => {
     const [num, setNumber] = useState(0);
-    var [dosage, setDosage] = useState(0);
-    
+    // var [dosage, setDosage] = useState(0);
     const myFunction = () => {
         alert('Test has been completed');
     }
@@ -23,49 +24,54 @@ const PatientDetails = () => {
     }
     const [Active, SetActive] = useState(false);
     const [Modal, SetModal] = useState(false);
-    const [timer , setTimer] = useState(false)
-
-
+    const [timer, setTimer] = useState(false)
+    const [close, setClose] = useState(false)
     const Loader = () => {
-          return(
+        return (
             <div>
-                  <TailSpin color="#ff3259" height={80} width={80} />
+               
+                <TailSpin color="#ff3259" height={80} width={700} />
+                <h4 style={{textAlign:"center", marginTop:"40px"}}>Running System Test....</h4>
             </div>
-          )
+        )
     }
-
-
-    const Result = () =>{
-        return(
-            <div>
+    const Result = () => {
+        return (
+            <div className='test_complete'>
+                <button onClick={() => SetModal(false)} className="systest_close"><ImCancelCircle/></button>
+                <AiFillCheckCircle className='complete_icon'/>
                 <h4>System Test Successful</h4>
             </div>
         )
     }
-
-   
-
-   const openTimer = () => {
+  const openTimer = () => {
         setTimer((prev) => !prev);
-        let myTimeout = setTimeout(() =>setTimer(false), 5000);
+        let myTimeout = setTimeout(() => setTimer(false), 5000);
 
-   }
+    }
 
+    // const closeModal = () => {
+    //     setClose((prev) => !prev);
+    //     let myTimeout1 = setTimeout(() => setClose(true), 7000);
 
-
-
-
-
+    // }
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const Nm = urlParams.get('Name')
+    const AG = urlParams.get('Age')
+    const GD = urlParams.get('Gender')
+    const DC = urlParams.get('Dcoll')
+    const DR = urlParams.get('Drem')
     return (
         <div>
             <div className='top'>
                 {/* <h2  style={{textAlign:"center", color:"white"}} className='page_title'>Ugo Justice</h2> */}
-                <button className='add_btn' onClick={() => { SetModal(true); openTimer(false)}}>Run System test</button>
+                <button className='add_btn' onClick={() => { SetModal(true); openTimer(false); }}>Run System test</button>
                 {Modal && <div className='popup2'>
                     <div className='popup2-inner'>
-                      {
-                        !timer ? Result() : Loader()
-                      }
+                        {
+                            !timer ? Result() : Loader()
+                        }
 
                     </div>
                 </div>
@@ -73,9 +79,6 @@ const PatientDetails = () => {
                 }
 
             </div>
-
-
-
             <div className='detail_card' onLoad={handleClick}>
                 <h4 className='stf'>Patient Details</h4>
                 <div style={{ float: "left", width: "36%" }} className="line">
@@ -88,13 +91,13 @@ const PatientDetails = () => {
                     <div className='text_info'>
                         <br></br>
                         <br></br>
-                        <h5>NAME: UGO JUSTICE</h5>
-                        <h5>AGE: 20</h5>
-                        <h5>GENDER: M</h5>
-                        <h5>DOSAGE COLLECTED: 20</h5>
-                        <h5>DOSAGE REMAINING: 20</h5>
+                        <h5>NAME: {Nm}</h5>
+                        <h5>AGE: {AG}</h5>
+                        <h5>GENDER: {GD}</h5>
+                        <h5>DOSAGE COLLECTED: {DC}</h5>
+                        <h5>DOSAGE REMAINING: {DR}</h5>
 
-                        <div className="form-group v_level">
+                        {/* <div className="form-group v_level">
                             <label for="exampleFormControlSelect1"><h5> VIRAL LEVEL: </h5></label>
                             <select className="form-control select_lenght" id="exampleFormControlSelect1">
                                 <option>10</option>
@@ -108,7 +111,7 @@ const PatientDetails = () => {
                                 <option>90</option>
                                 <option>100</option>
                             </select>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className='img_holder'>
@@ -124,15 +127,15 @@ const PatientDetails = () => {
                                         <h4>DOSAGE REQUIRED : <span>{(() => {
                                             if (num < 30) {
                                                 return (
-                                                    20
+                                                    "10 ml"
                                                 )
                                             } else if (num >= 30 && num <= 60) {
                                                 return (
-                                                    21
+                                                    "20 ml"
                                                 )
                                             } else {
                                                 return (
-                                                    22
+                                                    "30 ml"
                                                 )
                                             }
                                         })()}</span></h4>

@@ -72,3 +72,21 @@
     font-weight: bold;
     margin-top: 30px;
 }
+
+.test_complete{
+    text-align: center;
+}
+
+
+.complete_icon{
+    font-size: 70px;
+    margin-bottom: 10px;
+    color: green;
+}
+
+.systest_close{
+    position: relative;
+    top: -40px;
+    left: 300px;
+
+}

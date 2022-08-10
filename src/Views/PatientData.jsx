@@ -4,10 +4,12 @@ import PageTitle from '../compnents/PageTitle'
 import { useState, useEffect } from 'react'
 import axios from "axios"
 import config from '../config'
+import { Table } from '../compnents/Table'
+import PatientTable from '../compnents/PatientTable'
+import CreatePatient from '../compnents/CreatePatient'
 
 const PatientData = () => {
   const [patients, setPatients] = useState([]);
-  // console.log(config.testURL);
   useEffect(() => {
     const fetchPatients = async () => {
       const res = await axios.get(`${config.testURL}/patient/detail`);
@@ -15,48 +17,63 @@ const PatientData = () => {
     };
     fetchPatients();
   }, []);
-  console.log(patients)
-  const [Popup, setPopup] = useState(false);
+  // console.log(patients);
+
+  // const [user, setUser] = useState([]);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const res = await axios.get(`${config.testURL}/login`);
+  //     setUser(res.data);
+  //   };
+  //   fetchUser();
+  // }, []);
+  // console.log(user)
+
+
+  // console.log(patients)
+  
   return (
     <div className="backgroundimg">
       {/* <div className='bod'> */}
       <PageTitle />
-      <button onClick={() => setPopup(true)} className="add_btn">Create Patient</button>
+      {/* <button onClick={() => setPopup(true)} className="add_btn">Create Patient</button>
       {
         Popup && <div className='popup2'>
           <div className='popup2-inner popup2-length'>
-          <h4 className='stf2'>Add Patient</h4>
-                <div style={{ float: "left", width: "36%" }} className="line">
-                    <hr />
-                </div>
-                <div style={{ float: "right", width: "36%" }}>
-                    <hr />
-                </div>
-          <form className='addUser_form'>
-            <input type="text" placeholder="Name" className='form-control mb-3' />
-            <input type="text" placeholder="Age" className='form-control mb-3' />
-            <div className="form-check">
-              <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"/>
+            <h4 className='stf2'>Add Patient</h4>
+            <div style={{ float: "left", width: "36%" }} className="line">
+              <hr />
+            </div>
+            <div style={{ float: "right", width: "36%" }}>
+              <hr />
+            </div>
+            <form className='addUser_form'>
+              <input type="text" placeholder="Name" className='form-control mb-3' />
+              <input type="text" placeholder="Age" className='form-control mb-3' />
+              <div className="form-check">
+                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
                 <label className="form-check-label" for="exampleRadios1">
                   Male
                 </label>
-            </div>
-            <div className="form-check">
-              <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
                 <label className="form-check-label" for="exampleRadios2">
-                 Female
+                  Female
                 </label>
-            </div>
-            <input type="text" placeholder="Dosage Collected" className='form-control mb-3' />
-            <input type="text" placeholder="Dosage Remaining" className='form-control mb-3' />
-            <input type="text" placeholder="Viral Level Remaining" className='form-control mb-3' />
-            <button onClick={() => {setPopup(false);}} className="addUserbtn2">Add Patient</button>
-          </form>
+              </div>
+              <input type="text" placeholder="Dosage Collected" className='form-control mb-3' />
+              <input type="text" placeholder="Dosage Remaining" className='form-control mb-3' />
+              <input type="text" placeholder="Viral Level Remaining" className='form-control mb-3' />
+              <button onClick={() => { setPopup(false); }} className="addUserbtn2">Add Patient</button>
+            </form>
           </div>
         </div>
-      }
+      } */}
+      <CreatePatient/>
+      
 
-      <table className="table table-striped table-width table-width2">
+      {/* <table className="table table-striped table-width table-width2">
         <thead>
           <tr>
             <th scope="col">Reg ID</th>
@@ -81,6 +98,10 @@ const PatientData = () => {
          
         </tbody>
       </table>
+    */}
+
+      {patients.map((p) =>
+        (<PatientTable patients={p} />))}
 
 
     </div>

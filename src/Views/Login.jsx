@@ -15,12 +15,12 @@ const Login = () => {
         e.preventDefault();
         dispatch({ type: "LOGIN_START" });
         try {
-            const res = await axios.post(`${config.baseURL}/api/auth/login`, {
+            const res = await axios.post(`${config.testURL}/login`, {
                 username: userRef.current.value,
                 password: passwordRef.current.value,
             })
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data })
-            res.data && window.location.replace("/admin");
+            res.data && window.location.replace("/patient");
         } catch (err) {
             dispatch({ type: "LOGIN_FAILURE" })
         }
@@ -33,7 +33,7 @@ const Login = () => {
                     <div className='form_holder'>
                         <div className='form_space'></div>
                         <div className='signup_form'>
-                            <form className='adminlogin_form' onSubmit={handleSubmit}>
+                            <form className='adminlogin_form' >
                                 <h2 style={{ textAlign: "center" }} className="adminlogin_title">Admin Login</h2>
                                 <div className="form-row">
                                     <div className="form-group form-edit">
@@ -48,7 +48,7 @@ const Login = () => {
 
 
 
-                                <button type="submit" className="btn btn-primary admin-btn" disabled={isFetching}>Login</button>
+                                <button type="submit" className="btn btn-primary admin-btn" onClick={handleSubmit} disabled={isFetching}>Login</button>
                             </form>
                         </div>
                     </div>
