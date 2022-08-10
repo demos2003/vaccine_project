@@ -2,10 +2,16 @@ import React from 'react'
 import "./patientdetail.css"
 import { useState } from 'react'
 import Popup from '../compnents/Popup'
+import { Audio, TailSpin } from 'react-loader-spinner'
+
+
+
+
 
 const PatientDetails = () => {
     const [num, setNumber] = useState(0);
     var [dosage, setDosage] = useState(0);
+    
     const myFunction = () => {
         alert('Test has been completed');
     }
@@ -16,6 +22,34 @@ const PatientDetails = () => {
         setNumber(randNumber(1, 100));
     }
     const [Active, SetActive] = useState(false);
+    const [Modal, SetModal] = useState(false);
+    const [timer , setTimer] = useState(false)
+
+
+    const Loader = () => {
+          return(
+            <div>
+                  <TailSpin color="#ff3259" height={80} width={80} />
+            </div>
+          )
+    }
+
+
+    const Result = () =>{
+        return(
+            <div>
+                <h4>System Test Successful</h4>
+            </div>
+        )
+    }
+
+   
+
+   const openTimer = () => {
+        setTimer((prev) => !prev);
+        let myTimeout = setTimeout(() =>setTimer(false), 5000);
+
+   }
 
 
 
@@ -26,7 +60,22 @@ const PatientDetails = () => {
         <div>
             <div className='top'>
                 {/* <h2  style={{textAlign:"center", color:"white"}} className='page_title'>Ugo Justice</h2> */}
+                <button className='add_btn' onClick={() => { SetModal(true); openTimer(false)}}>Run System test</button>
+                {Modal && <div className='popup2'>
+                    <div className='popup2-inner'>
+                      {
+                        !timer ? Result() : Loader()
+                      }
+
+                    </div>
+                </div>
+
+                }
+
             </div>
+
+
+
             <div className='detail_card' onLoad={handleClick}>
                 <h4 className='stf'>Patient Details</h4>
                 <div style={{ float: "left", width: "36%" }} className="line">

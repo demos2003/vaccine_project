@@ -1,9 +1,21 @@
 import React from 'react'
 import "./patientdata.css"
 import PageTitle from '../compnents/PageTitle'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from "axios"
+import config from '../config'
 
 const PatientData = () => {
+  const [patients, setPatients] = useState([]);
+  // console.log(config.testURL);
+  useEffect(() => {
+    const fetchPatients = async () => {
+      const res = await axios.get(`${config.testURL}/patient/detail`);
+      setPatients(res.data);
+    };
+    fetchPatients();
+  }, []);
+  console.log(patients)
   const [Popup, setPopup] = useState(false);
   return (
     <div className="backgroundimg">
@@ -23,15 +35,15 @@ const PatientData = () => {
           <form className='addUser_form'>
             <input type="text" placeholder="Name" className='form-control mb-3' />
             <input type="text" placeholder="Age" className='form-control mb-3' />
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"/>
-                <label class="form-check-label" for="exampleRadios1">
+            <div className="form-check">
+              <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"/>
+                <label className="form-check-label" for="exampleRadios1">
                   Male
                 </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
-                <label class="form-check-label" for="exampleRadios2">
+            <div className="form-check">
+              <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
+                <label className="form-check-label" for="exampleRadios2">
                  Female
                 </label>
             </div>
@@ -44,7 +56,7 @@ const PatientData = () => {
         </div>
       }
 
-      <table class="table table-striped table-width table-width2">
+      <table className="table table-striped table-width table-width2">
         <thead>
           <tr>
             <th scope="col">Reg ID</th>
@@ -66,78 +78,7 @@ const PatientData = () => {
             <td>20</td>
             <td>80</td>
           </tr>
-          <tr>
-            <th scope="row">ABC1234657</th>
-            <td>Ugo Justice</td>
-            <td>19</td>
-            <td>M</td>
-            <td>20</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
-          <tr>
-            <th scope="row">ABC1234657</th>
-            <td>Ugo Justice</td>
-            <td>19</td>
-            <td>M</td>
-            <td>20</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
-          <tr>
-            <th scope="row">ABC1234657</th>
-            <td>Ugo Justice</td>
-            <td>19</td>
-            <td>M</td>
-            <td>20</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
-          <tr>
-            <th scope="row">ABC1234657</th>
-            <td>Ugo Justice</td>
-            <td>19</td>
-            <td>M</td>
-            <td>20</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
-          <tr>
-            <th scope="row">ABC1234657</th>
-            <td>Ugo Justice</td>
-            <td>19</td>
-            <td>M</td>
-            <td>20</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
-          <tr>
-            <th scope="row">ABC1234657</th>
-            <td>Ugo Justice</td>
-            <td>19</td>
-            <td>M</td>
-            <td>20</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
-          <tr>
-            <th scope="row">ABC1234657</th>
-            <td>Ugo Justice</td>
-            <td>19</td>
-            <td>M</td>
-            <td>20</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
-          <tr>
-            <th scope="row">ABC1234657</th>
-            <td>Ugo Justice</td>
-            <td>19</td>
-            <td>M</td>
-            <td>20</td>
-            <td>20</td>
-            <td>80</td>
-          </tr>
+         
         </tbody>
       </table>
 
