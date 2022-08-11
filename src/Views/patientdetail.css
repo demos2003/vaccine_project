@@ -86,7 +86,15 @@
 
 .systest_close{
     position: relative;
-    top: -40px;
-    left: 300px;
+    top: -45px;
+    left: 330px;
+    background-color: white !important;
+    border: none !important;
+    font-size: 25px;
 
+
+}
+
+.close_icon{
+   
 }

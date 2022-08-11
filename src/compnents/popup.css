@@ -42,3 +42,12 @@
     font-size: 25px;
   }
   
+  .table-holder1{
+    margin-bottom: 0 !important;
+    margin-top: -31px !important;
+    
+  }
+
+  tr{
+    height: 70px !important;
+  }

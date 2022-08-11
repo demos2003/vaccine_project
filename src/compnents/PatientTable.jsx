@@ -13,7 +13,7 @@ const PatientTable = ({ patients }) => {
             <th scope="col">Gender</th>
             <th scope="col">Dosage Collected</th>
             <th scope="col">Dosage Remaining</th>
-            <th scope="col">Viral Level</th>
+            {/* <th scope="col">Viral Level</th> */}
           </tr>
         </thead>
         {/* <tbody>
